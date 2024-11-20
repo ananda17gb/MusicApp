@@ -1,4 +1,5 @@
 import 'package:music_app/domain/models/favorite.dart';
+import 'package:music_app/domain/models/player.dart';
 import 'package:music_app/domain/models/playlist.dart';
 
 class Song {
@@ -31,5 +32,11 @@ class Song {
 
     void removeFromFavorite(Favorite favorite) {
         favorite.removeSong(this);  
+    }
+
+    Future<void> play(Player player) async {
+        player.queue = [this];  // Set the current song in the player's queue
+        player.currentIndex = 0;  // Start from this song
+        await player.play();  // Play the song
     }
 }
