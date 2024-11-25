@@ -3,8 +3,10 @@ import 'package:music_app/presentation/pages/search_screen.dart';
 import 'package:music_app/presentation/pages/home_screen.dart';
 import 'package:music_app/presentation/pages/playlist_screen.dart';
 import 'package:music_app/presentation/widgets/navbar.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
   runApp(const MyApp());
 }
 
@@ -53,4 +55,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
