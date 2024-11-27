@@ -37,22 +37,32 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
             TextField(
               controller: _searchController,
               onChanged: _searchForPlaylist,
-              style: const TextStyle(color: Colors.white),
-              cursorColor: Colors.white54,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                labelText: "Find playlists",
-                labelStyle: TextStyle(color: Colors.white54),
+              style: const TextStyle(color: Colors.black),
+              cursorColor: Colors.black,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.search, color: Colors.black54),
+                suffixIcon: _searchController.text.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear, color: Colors.black54),
+                        onPressed: () {
+                          _searchController.clear();
+                          _searchForPlaylist('');
+                        },
+                      )
+                    : null,
+                hintText: "Find Playlist",
+                hintStyle: const TextStyle(color: Colors.black54),
                 filled: true,
-                fillColor: Color.fromARGB(95, 95, 95, 95),
-                contentPadding: EdgeInsets.all(2.0),
+                fillColor: const Color.fromARGB(255, 237, 237, 239), 
+                contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Color.fromARGB(95, 95, 95, 95), width: 2.0),
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(color: Colors.transparent),
                 ),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Color.fromARGB(95, 95, 95, 95), width: 2.0)),
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(color: Colors.transparent),
+                ),
               ),
             ),
             const SizedBox(height: 10),

@@ -36,12 +36,12 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.black,
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              backgroundColor: Colors.black,
-              unselectedItemColor: Colors.white38,
-              selectedItemColor: Colors.red)),
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              backgroundColor: Colors.white,
+              unselectedItemColor: Colors.grey,
+              selectedItemColor: Colors.blue.shade900)),
       home: Scaffold(
         body: IndexedStack(
           index: _selectedIndex,

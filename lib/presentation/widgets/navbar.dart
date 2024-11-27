@@ -13,16 +13,16 @@ class BottomNavBar extends StatelessWidget {
       currentIndex: selectedIndex,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Search',
+          icon: Icon(Icons.music_note),
+          label: 'Musik',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.library_music),
-          label: 'Library',
+          label: 'Lokal',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle_rounded),
+          label: 'Saya',
         ),
       ],
       onTap: onTap,
