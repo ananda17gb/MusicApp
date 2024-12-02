@@ -25,13 +25,17 @@ class PlayingBar extends StatelessWidget {
       curve: Curves.easeInOut,
       margin: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.grey.shade800,
+        gradient: const LinearGradient(
+          colors: [Color(0xFFE0E0E0), Color(0xFFBDBDBD)], // Grey gradient
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: Colors.black.withOpacity(0.2), // Subtle shadow
+            blurRadius: 15,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -52,7 +56,7 @@ class PlayingBar extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            
+
             // Song details
             Expanded(
               child: Column(
@@ -62,7 +66,7 @@ class PlayingBar extends StatelessWidget {
                   Text(
                     songTitle,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.black, // Black text for song title
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
@@ -71,7 +75,7 @@ class PlayingBar extends StatelessWidget {
                   Text(
                     artistName,
                     style: const TextStyle(
-                      color: Colors.white70,
+                      color: Colors.black54, // Subtle black for artist name
                       fontSize: 14,
                     ),
                     overflow: TextOverflow.ellipsis,
@@ -79,18 +83,18 @@ class PlayingBar extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             // Play/Pause and Close buttons
             IconButton(
               icon: Icon(
                 isPlaying ? Icons.pause_circle_filled : Icons.play_circle_filled,
-                color: Colors.white,
+                color: Colors.black87, // Darker icon for contrast
                 size: 40,
               ),
               onPressed: onPlayPause,
             ),
             IconButton(
-              icon: const Icon(Icons.close, color: Colors.white70),
+              icon: const Icon(Icons.close, color: Colors.black54), // Close button with subtle color
               onPressed: onClose ?? onPlayPause,
             ),
           ],

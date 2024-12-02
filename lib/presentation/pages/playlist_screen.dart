@@ -12,7 +12,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   final TextEditingController _searchController = TextEditingController();
 
   void _searchForPlaylist(String query) {
-    // Handle search logic here (e.g., filter songs or make an API call)
     print('Searching for: $query');
   }
 

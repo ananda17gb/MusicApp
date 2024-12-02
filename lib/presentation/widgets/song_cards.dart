@@ -247,15 +247,33 @@ class SongsCards extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: Colors.grey.shade900,
+        color: Colors.grey.shade300,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 6,
+            color: Colors.grey.shade600,
+            spreadRadius: 1,
+            blurRadius: 15,
+            blurStyle: BlurStyle.normal,
             offset: const Offset(0, 3),
           ),
+          const BoxShadow(
+            color: Colors.white,
+            offset: Offset(-5, -5),
+            blurRadius: 15,
+            spreadRadius: 1,
+          )
         ],
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.grey.shade200,
+            Colors.grey.shade300,
+            Colors.grey.shade400,
+            Colors.grey.shade500,
+          ],
+        ),
       ),
       child: GestureDetector(
         onTap: onPlay,
@@ -290,30 +308,92 @@ class SongsCards extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     artistName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
-                      color: Colors.white70,
+                      color: Colors.grey.shade900,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
             ),
-            Icon(
-              isCurrentlyPlaying ? Icons.pause_circle : Icons.play_circle,
-              color: Colors.white,
-              size: 32,
-            ),
+            // Wave Icon Effect
+            isCurrentlyPlaying
+                ? const WaveAnimationIcon(size: 32)
+                : Icon(
+                    Icons.play_circle,
+                    color: Colors.grey.shade900,
+                    size: 32,
+                  ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class WaveAnimationIcon extends StatefulWidget {
+  final double size;
+  const WaveAnimationIcon({super.key, this.size = 32});
+
+  @override
+  State<WaveAnimationIcon> createState() => _WaveAnimationIconState();
+}
+
+class _WaveAnimationIconState extends State<WaveAnimationIcon>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    )..repeat();
+    _animation = Tween<double>(begin: 0.8, end: 1.2).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: widget.size * _animation.value,
+              height: widget.size * _animation.value,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey.shade400.withOpacity(0.2),
+              ),
+            ),
+            Icon(
+              Icons.graphic_eq, // Use this to represent a wave effect
+              color: Colors.grey.shade900,
+              size: widget.size,
+            ),
+          ],
+        );
+      },
     );
   }
 }
